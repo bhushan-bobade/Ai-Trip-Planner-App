@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react"
 import GooglePlacesAutocomplete from "react-google-places-autocomplete"
@@ -19,7 +21,7 @@ import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { useNavigate } from "react-router-dom";
-import Footer from "@/view-trip/components/Footer";
+
 
 
 function CreateTrip() {
@@ -48,7 +50,9 @@ function CreateTrip() {
 
   const login = useGoogleLogin({
     onSuccess:(codeResp)=>GetUserProfile(codeResp),
-    onError:(error)=>console.log(error)
+    onError:(error)=>console.log(error),
+    flow: 'auth-code',
+    client_id:import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID
   })
 
   const OnGenerateTrip=async()=>{
